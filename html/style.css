@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+
+.przyciski {
+    border-radius: 10px;
+    width: 50%;
+    height: 14%;
+    margin-left: 25%;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 1%;
+    bottom: 0;
+    background-color: rgba(82, 82, 82, 0.274, 100);
+    backdrop-filter: blur(5px);
+    position: absolute;
+    border: 1px solid black;
+}
+
+.btn-normal {
+    margin-top: 1%;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, transparent 50%, rgb(85, 85, 85) 50%);
+    background-size: 20% 200%;
+    background-position:left top;
+    color: white;
+    font-family: Oswald, sans-serif !important;
+    text-align: center;
+    padding: 5px;
+    position: relative;
+    font-size: 20px;
+    width: 13%;
+    height: 87%;
+}
+
+
+.btn-normal:hover{
+
+    background-position: left bottom;
+    transition:all 0.25s ease-in;
+}
+
+.desktop {
+    margin-top: 5%;
+    margin-left: 15%;
+    border-radius: 15px;
+    border: 2px solid black;
+    position: absolute;
+    background-image: url(desktop.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 70%;
+    height: 70%;
+    font-family: Oswald, sans-serif;
+}
+
+.top {
+    height: 3%;
+    width: 100%;
+    background-color: white;
+    border-top: 15px;
+    position: absolute;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.top-application {
+    height: 5%;
+    width: 100%;
+    background-color: white;
+    border-top: 15px;
+    position: absolute;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.application {
+    margin-left: 20%;
+    margin-top: 5%;
+    width: 60%;
+    height: 70%;
+    position: absolute;
+    border-radius: 5px;
+    background-color: gray;
+    border-radius: 10px;
+}

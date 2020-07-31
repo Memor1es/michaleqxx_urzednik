@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+		
+		<script>
+		$(function() {
+			/* open the UI for user */
+			window.addEventListener('message', function(event) {
+				if(event.data.type == "open"){
+					$('.przyciski').fadeIn(1000);
+					$('.desktop').css('display', 'block')
+					$('body').css('display', 'block')
+					$('html').css('display', 'block')
+					$('#app_checkvehicle').hide();
+				} else if (event.data.type == "close"){
+					$('.desktop').css('display', 'none')
+					$('body').css('display', 'none')
+					$('html').css('display', 'none')
+					$('#app_checkvehicle').hide();
+				}
+			});
+		});	
+		</script>
+	</head>
+	
+    <body>
+		
+		<div class="desktop"> 
+        <div class="top">&nbsp;&nbsp;<i class="fas fa-wifi"></i>&nbsp;Wi-Fi</div>
+        <div class="przyciski">
+                
+            <button class="btn-normal" id="open_pojazdy">Pojazdy</button>&nbsp;&nbsp;<button class="btn-normal">Button 2</button>&nbsp;&nbsp;<button class="btn-normal">Button 3</button>&nbsp;&nbsp;<button class="btn-normal">Button 4</button>&nbsp;&nbsp;<button class="btn-normal">Button 5</button>&nbsp;&nbsp;<button class="btn-normal" id="exit"><i class="fas fa-sign-out-alt"></i>&nbsp;Exit</button>
+
+        </div>
+
+        <div class="application" id="app_checkvehicle">
+
+            <div class="top-application">
+                &nbsp;&nbsp;<i class="fas fa-stop" style="color:red; cursor: pointer;" id="exit_pojazdy"></i>&nbsp;&nbsp;<i class="fas fa-stop" style="color:yellow"></i>&nbsp;&nbsp;<i class="fas fa-stop" style="color: green"></i>
+                &nbsp;&nbsp;<span style="text-align: right;">Sprawdz pojazd</span>
+            </div>
+
+        </div>
+    </div>
+		
+    </body>
+	
+	<script type="text/javascript">
+	
+	$("#exit_gui").click(function(){
+		$('.desktop').css('display', 'none')
+		$.post('http://lspd_tablet/NUIFocusOff', JSON.stringify({}));
+	});
+
+	$("#exit_pojazdy").click(function(){
+		$('#app_checkvehicle').hide();
+	});
+	
+	$("#open_pojazdy").click(function(){
+		$('#app_checkvehicle').fadeIn(1000);
+	});
+
+	document.onkeyup = function (data) {
+		if (data.which == 27) { // Escape key
+			$('.btn-group').css('display', 'none')
+			$.post('http://lspd_tablet/NUIFocusOff', JSON.stringify({}));
+		}
+	};
+	</script>
+</html>
