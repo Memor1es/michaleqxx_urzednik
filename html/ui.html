@@ -7,66 +7,100 @@
 		
 		<script>
 		$(function() {
-			/* open the UI for user */
 			window.addEventListener('message', function(event) {
 				if(event.data.type == "open"){
-					$('.przyciski').fadeIn(1000);
-					$('.desktop').css('display', 'block')
+					$('.przyciski').hide();
+					$('#iframe').hide();
+					$('.przyciski').fadeIn(500);
+					$('#wszystko').css('display', 'block')
 					$('body').css('display', 'block')
 					$('html').css('display', 'block')
 					$('#app_checkvehicle').hide();
 				} else if (event.data.type == "close"){
-					$('.desktop').css('display', 'none')
+					$('#wszystko').css('display', 'none')
 					$('body').css('display', 'none')
 					$('html').css('display', 'none')
 					$('#app_checkvehicle').hide();
+					$('#iframe').hide();
 				}
 			});
 		});	
 		</script>
 	</head>
 	
-    <body>
-		
+    <body style="background: transparent;">
+	<div id="wszystko">
 		<div class="desktop"> 
-        <div class="top">&nbsp;&nbsp;<i class="fas fa-wifi"></i>&nbsp;Wi-Fi</div>
-        <div class="przyciski">
-                
-            <button class="btn-normal" id="open_pojazdy">Pojazdy</button>&nbsp;&nbsp;<button class="btn-normal">Button 2</button>&nbsp;&nbsp;<button class="btn-normal">Button 3</button>&nbsp;&nbsp;<button class="btn-normal">Button 4</button>&nbsp;&nbsp;<button class="btn-normal">Button 5</button>&nbsp;&nbsp;<button class="btn-normal" id="exit"><i class="fas fa-sign-out-alt"></i>&nbsp;Exit</button>
+			<div class="top">&nbsp;&nbsp;<i class="fas fa-wifi"></i>&nbsp;Wi-Fi</div>
+			<div class="przyciski">
+					
+				<button class="btn-normal" id="open_pojazdy">Pojazdy</button>&nbsp;&nbsp;<button class="btn-normal" id="open_iframe">Baza</button>&nbsp;&nbsp;<button class="btn-normal">Button 3</button>&nbsp;&nbsp;<button class="btn-normal">Button 4</button>&nbsp;&nbsp;<button class="btn-normal">Button 5</button>&nbsp;&nbsp;<button class="btn-normal" id="exit_gui"><i class="fas fa-sign-out-alt"></i>&nbsp;Exit</button>
 
-        </div>
+			</div>
+			
+			<div class="application" id="iframe">
 
-        <div class="application" id="app_checkvehicle">
+				<div class="top-application">
+					&nbsp;&nbsp;<i class="fas fa-stop" style="color:red; cursor: pointer;" id="exit_iframe"></i>&nbsp;&nbsp;<i class="fas fa-stop" style="color:yellow"></i>&nbsp;&nbsp;<i class="fas fa-stop" style="color: green"></i>
+					&nbsp;&nbsp;<span style="text-align: right;">Baza danych ONLINE</span>
+				</div>
 
-            <div class="top-application">
-                &nbsp;&nbsp;<i class="fas fa-stop" style="color:red; cursor: pointer;" id="exit_pojazdy"></i>&nbsp;&nbsp;<i class="fas fa-stop" style="color:yellow"></i>&nbsp;&nbsp;<i class="fas fa-stop" style="color: green"></i>
-                &nbsp;&nbsp;<span style="text-align: right;">Sprawdz pojazd</span>
-            </div>
+				<iframe src="https://docs.google.com/spreadsheets/d/1WkI9CJnr-aX5ZABojZ0mkvIjJqmsbcvCZMsKvIIUW7A/edit?usp=sharing" class="iframe"></iframe>
 
-        </div>
-    </div>
+			</div>
+			
+			<div class="application" id="app_checkvehicle">
+
+				<div class="top-application">
+					&nbsp;&nbsp;<i class="fas fa-stop" style="color:red; cursor: pointer;" id="exit_pojazdy"></i>&nbsp;&nbsp;<i class="fas fa-stop" style="color:yellow"></i>&nbsp;&nbsp;<i class="fas fa-stop" style="color: green"></i>
+					&nbsp;&nbsp;<span style="text-align: right;">Sprawdz pojazd</span>
+				</div>
+				<div class="naglowki"><span class="naglowek">Rejestracja pojazdu:&nbsp;&nbsp;&nbsp;</span></div>
+				<div class="input-form">
+					<input class="input-normal" id="rejestracja" type="text" placeholder="">
+				</div>
+				<button class="btn-application" id="sprawdz">Sprawdz</button>
+			</div>
+			
+			
+		</div>
+	</div>
 		
     </body>
 	
 	<script type="text/javascript">
 	
 	$("#exit_gui").click(function(){
-		$('.desktop').css('display', 'none')
-		$.post('http://lspd_tablet/NUIFocusOff', JSON.stringify({}));
+		$('#wszystko').css('display', 'none')
+		$.post('http://michaleqxx_urzednik/NUIFocusOff', JSON.stringify({}));
 	});
 
 	$("#exit_pojazdy").click(function(){
-		$('#app_checkvehicle').hide();
+		$('#app_checkvehicle').fadeOut(500);
+	});
+	
+	$("#exit_iframe").click(function(){
+		$('#iframe').fadeOut(500);
 	});
 	
 	$("#open_pojazdy").click(function(){
-		$('#app_checkvehicle').fadeIn(1000);
+		$('#app_checkvehicle').fadeIn(500);
 	});
-
+	
+	$("#open_iframe").click(function(){
+		$('#iframe').fadeIn(500);
+	});
+	
+	$("#sprawdz").click(function() {
+		$.post('http://lspd_tablet/sprawdzPojazd', JSON.stringify({rej: $("#rejestracja").val()}));
+		$('#wszystko').css('display', 'none')
+		$.post('http://michaleqxx_urzednik/NUIFocusOff', JSON.stringify({}));
+	});
+	
 	document.onkeyup = function (data) {
 		if (data.which == 27) { // Escape key
-			$('.btn-group').css('display', 'none')
-			$.post('http://lspd_tablet/NUIFocusOff', JSON.stringify({}));
+			$('#wszystko').css('display', 'none')
+			$.post('http://michaleqxx_urzednik/NUIFocusOff', JSON.stringify({}));
 		}
 	};
 	</script>
