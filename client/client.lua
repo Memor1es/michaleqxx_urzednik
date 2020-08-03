@@ -13,7 +13,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(10)
 	end
 	
-	SetNuiFocus(true, true)
+	SetNuiFocus(false, false)
 	SendNUIMessage({type = 'close'})
 	
 	PlayerData = ESX.GetPlayerData()
@@ -296,14 +296,8 @@ function Printer()
 	
 	local elements = {}
 	
-	table.insert(elements, {label = '<span style="font-family: bold;">Dla firm:</span>', value = ''})
-	table.insert(elements, {label = 'Rozliczenie dochodu podatkowego',     value = 'firma'})
-	table.insert(elements, {label = 'Formularz o założenie firmy',     value = 'firma1'})
-	table.insert(elements, {label = 'Formularz o handlu żywnością',     value = 'firma2'})
-	table.insert(elements, {label = 'Koncesja na alkohol',     value = 'firma3'})
-	table.insert(elements, {label = '<span style="font-family: bold;">Dla obywatela:</span>', value = ''})
 	table.insert(elements, {label = 'Formularz na prawo jazdy',  value = 'prawojazdy'})
-	table.insert(elements, {label = 'Podatek za nieruchomość',  value = 'nieruchomosc'})
+	table.insert(elements, {label = 'Dowod osobisty',  value = 'dowod'})
 
 	ESX.UI.Menu.CloseAll()
 
